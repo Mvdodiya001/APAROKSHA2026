@@ -2,7 +2,7 @@ import BinaryBackground from "./components/BinaryBackground";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Timeline from "./components/Timeline";
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 
 const App = () => {
   return (
