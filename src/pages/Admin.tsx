@@ -1,9 +1,9 @@
 import { useState } from "react";
 import BinaryBackground from "../components/BinaryBackground";
 import Navbar from "../components/Navbar";
-import { Lock, Unlock, Upload, Settings, CalendarRange, Plus, Edit2, Trash2, Save, X } from "lucide-react";
-import { timelineData as initialTimeline, TimelineDay, TimelineEvent } from "../data/timeline";
-import { contentData as initialContent, SiteContent, Coordinator } from "../data/content";
+import { Lock, Unlock, Upload, Settings, CalendarRange, Plus, Trash2, Save } from "lucide-react";
+import { timelineData as initialTimeline, TimelineDay } from "../data/timeline";
+import { contentData as initialContent, SiteContent } from "../data/content";
 
 export default function Admin() {
   const [password, setPassword] = useState("");
