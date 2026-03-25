@@ -46,7 +46,7 @@ export const timelineData: TimelineDay[] = [
         "id": "iii-5-hackathon",
         "name": "III 5.0 Hackathon Presentation",
         "time": "8:00pm - 10:00pm",
-        "description": "hackathon "
+        "description": ""
       },
       {
         "id": "cpl",
