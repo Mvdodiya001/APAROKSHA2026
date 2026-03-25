@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "../lib/utils";
+import ApkLogo from "../assets/Apk Logo.png";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -35,11 +36,12 @@ const Navbar = () => {
             href="#"
             className="flex flex-col select-none group focus:outline-none"
           >
-            <span className="text-2xl font-bold tracking-tighter text-glow-primary">
+            <span className="text-2xl font-bold tracking-tighter text-glow-primary flex items-center gap-3">
+              <img src={ApkLogo} alt="Aparoksha Logo" className="w-8 h-8 md:w-10 md:h-10 object-contain" />
               APAROKSHA
             </span>
-            <span className="text-[10px] tracking-[0.2em] text-primary/80 uppercase font-mono group-hover:text-primary transition-colors">
-              //  Logo Placeholder
+            <span className="text-[10px] tracking-[0.2em] text-primary/80 uppercase font-mono group-hover:text-primary transition-colors mt-1">
+              The Ultimate Tech Fest
             </span>
           </a>
 
