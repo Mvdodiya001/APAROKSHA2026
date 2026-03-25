@@ -26,7 +26,7 @@ export default async function handler(req, res) {
     commitMessage = "Update timeline events via Admin Panel";
   } else if (type === "content") {
     filePath = "src/data/content.ts";
-    fileContent = `export interface Coordinator {\n  name: string;\n  phone: string;\n}\n\nexport interface SiteContent {\n  aboutUsText: string;\n  flyerLink: string;\n  contactEmail: string;\n  studentCoordinators: Coordinator[];\n  facultyIncharge: Coordinator[];\n}\n\nexport const contentData: SiteContent = ${JSON.stringify(data, null, 2)};\n`;
+    fileContent = `export interface Coordinator {\n  name: string;\n  phone: string;\n}\n\nexport interface SiteContent {\n  aboutUsText: string;\n  flyerLink: string;\n  eventsBrochureLink: string;\n  contactEmail: string;\n  studentCoordinators: Coordinator[];\n  facultyIncharge: Coordinator[];\n}\n\nexport const contentData: SiteContent = ${JSON.stringify(data, null, 2)};\n`;
     commitMessage = "Update site content via Admin Panel";
   } else if (type === "flyer") {
     // SECURITY PATCH: Sanitize fileName to prevent Path Traversal attacks (e.g., ../../package.json)
@@ -34,6 +34,11 @@ export default async function handler(req, res) {
     filePath = `public/${sanitizedFileName}`;
     fileContent = data; // Data is already coming as base64 string from the frontend
     commitMessage = `Upload brochure ${sanitizedFileName} via Admin Panel`;
+  } else if (type === "eventsBrochure") {
+    const sanitizedFileName = (fileName || "events-brochure.pdf").replace(/[^a-zA-Z0-9.\-_]/g, "");
+    filePath = `public/${sanitizedFileName}`;
+    fileContent = data;
+    commitMessage = `Upload events brochure ${sanitizedFileName} via Admin Panel`;
   } else {
     return res.status(400).json({ error: "Invalid type" });
   }

@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import Timeline from "../components/Timeline";
 import { Mail, Phone } from "lucide-react";
 import { contentData } from "../data/content";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -47,15 +48,13 @@ const Home = () => {
                     >
                       Get in Touch
                     </a>
-                    <a
-                      href={contentData.flyerLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
+                    <Link
+                      to="/brochure"
                       className="cyber-button px-8 py-4 border border-primary/50 text-foreground hover:bg-primary/10 transition-all uppercase text-sm tracking-wider flex items-center gap-2 group"
                     >
                       <span className="relative z-10">View Flyer</span>
                       <span className="relative z-10 font-mono text-primary group-hover:translate-x-1 transition-transform">_&gt;</span>
-                    </a>
+                    </Link>
                   </div>
                 </div>
               </div>

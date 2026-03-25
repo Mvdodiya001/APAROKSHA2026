@@ -20,6 +20,8 @@ export default function Admin() {
   // State for Flyer (to upload)
   const [flyerFile, setFlyerFile] = useState<File | null>(null);
   const [customFlyerName, setCustomFlyerName] = useState("");
+  const [eventsBrochureFile, setEventsBrochureFile] = useState<File | null>(null);
+  const [customEventsBrochureName, setCustomEventsBrochureName] = useState("");
   
   // Generic Save State
   const [isSaving, setIsSaving] = useState(false);
@@ -46,7 +48,7 @@ export default function Admin() {
     }
   };
 
-  const handleSaveToGithub = async (type: "timeline" | "content" | "flyer") => {
+  const handleSaveToGithub = async (type: "timeline" | "content" | "flyer" | "eventsBrochure") => {
     setIsSaving(true);
     setSaveMessage("Saving to GitHub and deploying...");
     try {
@@ -63,6 +65,12 @@ export default function Admin() {
          await new Promise((resolve) => (reader.onload = resolve));
          const base64 = (reader.result as string).split(',')[1];
          payload = { type: "flyer", fileName: customFlyerName || flyerFile.name, data: base64, password };
+      } else if (type === "eventsBrochure" && eventsBrochureFile) {
+         const reader = new FileReader();
+         reader.readAsDataURL(eventsBrochureFile);
+         await new Promise((resolve) => (reader.onload = resolve));
+         const base64 = (reader.result as string).split(',')[1];
+         payload = { type: "eventsBrochure", fileName: customEventsBrochureName || eventsBrochureFile.name, data: base64, password };
       }
 
       const res = await fetch("/api/save", {
@@ -267,6 +275,17 @@ export default function Admin() {
                       </div>
                       
                       <div>
+                        <label className="text-sm font-bold text-foreground mb-2 block">Events Brochure Link (e.g. /events-brochure.pdf)</label>
+                        <input 
+                           type="text"
+                           className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground focus:border-primary focus:outline-none"
+                           value={content.eventsBrochureLink}
+                           onChange={(e) => setContent({...content, eventsBrochureLink: e.target.value})}
+                        />
+                        <p className="text-xs text-muted-foreground mt-1">Make sure this matches the filename you upload in the Flyer tab.</p>
+                      </div>
+                      
+                      <div>
                         <label className="text-sm font-bold text-foreground mb-2 block">Contact Email</label>
                         <input 
                            type="email"
@@ -280,57 +299,115 @@ export default function Admin() {
                )}
 
                {activeTab === "flyer" && (
-                 <div>
-                   <div className="flex items-center justify-between mb-8 pb-4 border-b border-border/50">
-                      <h2 className="text-2xl font-bold">Flyer / Brochure</h2>
-                      <button 
-                         onClick={() => handleSaveToGithub("flyer")}
-                         disabled={isSaving || !flyerFile}
-                         className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-bold tracking-wider uppercase hover:bg-primary/90 transition-colors disabled:opacity-50">
-                        <Save className="w-4 h-4" /> Upload & Deploy
-                      </button>
-                   </div>
-                   
-                   <div className="space-y-8">
-                     <div className="border-2 border-dashed border-border/50 rounded-xl p-12 text-center flex flex-col items-center justify-center bg-background/30 hover:bg-background/50 transition-colors">
-                        <input 
-                           type="file" 
-                           id="flyer-upload" 
-                           className="hidden" 
-                           accept="application/pdf"
-                           onChange={(e) => {
-                             if (e.target.files && e.target.files.length > 0) {
-                               const file = e.target.files[0];
-                               setFlyerFile(file);
-                               setCustomFlyerName(file.name);
-                             }
-                           }}
-                        />
-                        <label htmlFor="flyer-upload" className="cursor-pointer flex flex-col items-center">
-                           <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-4 cursor-pointer text-primary hover:bg-primary hover:text-primary-foreground transition-all">
-                             <Upload className="w-8 h-8" />
-                           </div>
-                           <h3 className="text-xl font-bold mb-2 cursor-pointer">Select a PDF</h3>
-                           <p className="text-muted-foreground text-sm cursor-pointer">
-                             {flyerFile ? <span className="text-primary font-medium">{flyerFile.name} ready to upload</span> : "Click to browse files (PDF only)"}
-                           </p>
-                        </label>
+                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                   {/* Main Flyer Uploader */}
+                   <div>
+                     <div className="flex items-center justify-between mb-8 pb-4 border-b border-border/50">
+                        <h2 className="text-2xl font-bold">Main Flyer</h2>
+                        <button 
+                           onClick={() => handleSaveToGithub("flyer")}
+                           disabled={isSaving || !flyerFile}
+                           className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-bold tracking-wider uppercase hover:bg-primary/90 transition-colors disabled:opacity-50">
+                          <Save className="w-4 h-4" /> Upload
+                        </button>
                      </div>
-
-                     {flyerFile && (
-                       <div className="bg-background/60 p-6 rounded-xl border border-border/50">
-                         <label className="text-sm font-bold text-foreground mb-2 block">Save file as (Name of the Brochure):</label>
-                         <input 
-                           type="text"
-                           className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground focus:border-primary focus:outline-none"
-                           value={customFlyerName}
-                           onChange={(e) => setCustomFlyerName(e.target.value)}
-                         />
-                         <p className="text-sm text-yellow-500 mt-2">
-                           ⚠️ After uploading, remember to go to <b>About & Contacts</b> and update the Flyer Link to <code>/{customFlyerName}</code> so the site button works!
-                         </p>
+                     
+                     <div className="space-y-8">
+                       <div className="border-2 border-dashed border-border/50 rounded-xl p-8 text-center flex flex-col items-center justify-center bg-background/30 hover:bg-background/50 transition-colors">
+                          <input 
+                             type="file" 
+                             id="flyer-upload" 
+                             className="hidden" 
+                             accept="application/pdf"
+                             onChange={(e) => {
+                               if (e.target.files && e.target.files.length > 0) {
+                                 const file = e.target.files[0];
+                                 setFlyerFile(file);
+                                 setCustomFlyerName(file.name);
+                               }
+                             }}
+                          />
+                          <label htmlFor="flyer-upload" className="cursor-pointer flex flex-col items-center">
+                             <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-4 cursor-pointer text-primary hover:bg-primary hover:text-primary-foreground transition-all">
+                               <Upload className="w-8 h-8" />
+                             </div>
+                             <h3 className="text-xl font-bold mb-2 cursor-pointer">Select a PDF</h3>
+                             <p className="text-muted-foreground text-sm cursor-pointer">
+                               {flyerFile ? <span className="text-primary font-medium">{flyerFile.name} ready</span> : "Click to browse"}
+                             </p>
+                          </label>
                        </div>
-                     )}
+
+                       {flyerFile && (
+                         <div className="bg-background/60 p-6 rounded-xl border border-border/50">
+                           <label className="text-sm font-bold text-foreground mb-2 block">Save flyer as:</label>
+                           <input 
+                             type="text"
+                             className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground focus:border-primary focus:outline-none"
+                             value={customFlyerName}
+                             onChange={(e) => setCustomFlyerName(e.target.value)}
+                           />
+                           <p className="text-sm text-yellow-500 mt-2">
+                             ⚠️ Remember to update the <b>Flyer Link</b> in Content.
+                           </p>
+                         </div>
+                       )}
+                     </div>
+                   </div>
+
+                   {/* Events Brochure Uploader */}
+                   <div>
+                     <div className="flex items-center justify-between mb-8 pb-4 border-b border-border/50">
+                        <h2 className="text-2xl font-bold">Events Brochure</h2>
+                        <button 
+                           onClick={() => handleSaveToGithub("eventsBrochure")}
+                           disabled={isSaving || !eventsBrochureFile}
+                           className="flex items-center gap-2 bg-secondary text-secondary-foreground px-4 py-2 rounded-lg text-sm font-bold tracking-wider uppercase hover:bg-secondary/90 transition-colors disabled:opacity-50">
+                          <Save className="w-4 h-4" /> Upload
+                        </button>
+                     </div>
+                     
+                     <div className="space-y-8">
+                       <div className="border-2 border-dashed border-border/50 rounded-xl p-8 text-center flex flex-col items-center justify-center bg-background/30 hover:bg-background/50 transition-colors">
+                          <input 
+                             type="file" 
+                             id="events-upload" 
+                             className="hidden" 
+                             accept="application/pdf"
+                             onChange={(e) => {
+                               if (e.target.files && e.target.files.length > 0) {
+                                 const file = e.target.files[0];
+                                 setEventsBrochureFile(file);
+                                 setCustomEventsBrochureName(file.name);
+                               }
+                             }}
+                          />
+                          <label htmlFor="events-upload" className="cursor-pointer flex flex-col items-center">
+                             <div className="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mb-4 cursor-pointer text-secondary hover:bg-secondary hover:text-secondary-foreground transition-all">
+                               <Upload className="w-8 h-8" />
+                             </div>
+                             <h3 className="text-xl font-bold mb-2 cursor-pointer">Select a PDF</h3>
+                             <p className="text-muted-foreground text-sm cursor-pointer">
+                               {eventsBrochureFile ? <span className="text-secondary font-medium">{eventsBrochureFile.name} ready</span> : "Click to browse"}
+                             </p>
+                          </label>
+                       </div>
+
+                       {eventsBrochureFile && (
+                         <div className="bg-background/60 p-6 rounded-xl border border-border/50">
+                           <label className="text-sm font-bold text-foreground mb-2 block">Save events brochure as:</label>
+                           <input 
+                             type="text"
+                             className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground focus:border-primary focus:outline-none"
+                             value={customEventsBrochureName}
+                             onChange={(e) => setCustomEventsBrochureName(e.target.value)}
+                           />
+                           <p className="text-sm text-yellow-500 mt-2">
+                             ⚠️ Remember to update the <b>Events Brochure Link</b> in Content.
+                           </p>
+                         </div>
+                       )}
+                     </div>
                    </div>
                  </div>
                )}
