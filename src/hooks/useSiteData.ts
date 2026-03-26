@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react';
-import { timelineData as builtinTimelineData, TimelineDay } from '../data/timeline';
-import { contentData as builtinContentData, SiteContent } from '../data/content';
+import { TimelineDay } from '../data/timeline';
+import { SiteContent } from '../data/content';
 
 export function useTimeline() {
-  const [data, setData] = useState<TimelineDay[]>(builtinTimelineData);
+  const [data, setData] = useState<TimelineDay[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('./timeline.json')
+    fetch('/timeline.json')
       .then(res => {
         if (!res.ok) throw new Error('Network response was not ok');
         return res.json();
@@ -18,7 +18,7 @@ export function useTimeline() {
         }
       })
       .catch(err => {
-        console.warn('Could not fetch timeline.json, falling back to bundled data:', err);
+        console.error('CRITICAL: Could not fetch timeline.json.', err);
       })
       .finally(() => {
         setLoading(false);
@@ -29,11 +29,11 @@ export function useTimeline() {
 }
 
 export function useContent() {
-  const [data, setData] = useState<SiteContent>(builtinContentData);
+  const [data, setData] = useState<SiteContent>({} as SiteContent);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch('./content.json')
+    fetch('/content.json')
       .then(res => {
         if (!res.ok) throw new Error('Network response was not ok');
         return res.json();
@@ -44,7 +44,7 @@ export function useContent() {
         }
       })
       .catch(err => {
-        console.warn('Could not fetch content.json, falling back to bundled data:', err);
+        console.error('CRITICAL: Could not fetch content.json.', err);
       })
       .finally(() => {
         setLoading(false);

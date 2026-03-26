@@ -21,13 +21,13 @@ export default async function handler(req, res) {
 
   // 3. Format payload
   if (type === "timeline") {
-    filePath = "src/data/timeline.ts";
-    fileContent = `export interface TimelineEvent {\n  id: string;\n  name: string;\n  time: string;\n  description?: string;\n  link?: string;\n}\n\nexport interface TimelineDay {\n  day: string;\n  events: TimelineEvent[];\n}\n\nexport const timelineData: TimelineDay[] = ${JSON.stringify(data, null, 2)};\n`;
-    commitMessage = "Update timeline events via Admin Panel";
+    filePath = "public/timeline.json";
+    fileContent = JSON.stringify(data, null, 2);
+    commitMessage = "Update timeline events JSON via Admin Panel";
   } else if (type === "content") {
-    filePath = "src/data/content.ts";
-    fileContent = `export interface Coordinator {\n  name: string;\n  phone: string;\n}\n\nexport interface SiteContent {\n  aboutUsText: string;\n  flyerLink: string;\n  eventsBrochureLink: string;\n  contactEmail: string;\n  studentCoordinators: Coordinator[];\n  facultyIncharge: Coordinator[];\n}\n\nexport const contentData: SiteContent = ${JSON.stringify(data, null, 2)};\n`;
-    commitMessage = "Update site content via Admin Panel";
+    filePath = "public/content.json";
+    fileContent = JSON.stringify(data, null, 2);
+    commitMessage = "Update site content JSON via Admin Panel";
   } else if (type === "flyer") {
     // SECURITY PATCH: Sanitize fileName to prevent Path Traversal attacks
     const sanitizedFileName = (fileName || "uploaded-flyer.pdf").replace(/[^a-zA-Z0-9.\-_]/g, "");
