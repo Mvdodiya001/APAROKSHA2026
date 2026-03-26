@@ -13,7 +13,7 @@ export default function Admin() {
 
   // State for Timeline
   const [timeline, setTimeline] = useState<TimelineDay[]>(initialTimeline);
-  
+
   // State for Content
   const [content, setContent] = useState<SiteContent>(initialContent);
 
@@ -22,7 +22,7 @@ export default function Admin() {
   const [customFlyerName, setCustomFlyerName] = useState("");
   const [eventsBrochureFile, setEventsBrochureFile] = useState<File | null>(null);
   const [customEventsBrochureName, setCustomEventsBrochureName] = useState("");
-  
+
   // Generic Save State
   const [isSaving, setIsSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState("");
@@ -35,7 +35,7 @@ export default function Admin() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ password })
       });
-      
+
       if (res.ok) {
         setIsAuthenticated(true);
         setError("");
@@ -55,22 +55,22 @@ export default function Admin() {
       // Logic for saving to verving serverless API which then pushes to GitHub
       let payload = {};
       if (type === "timeline") {
-         payload = { type: "timeline", data: timeline, password };
+        payload = { type: "timeline", data: timeline, password };
       } else if (type === "content") {
-         payload = { type: "content", data: content, password };
+        payload = { type: "content", data: content, password };
       } else if (type === "flyer" && flyerFile) {
-         // Create a base64 string
-         const reader = new FileReader();
-         reader.readAsDataURL(flyerFile);
-         await new Promise((resolve) => (reader.onload = resolve));
-         const base64 = (reader.result as string).split(',')[1];
-         payload = { type: "flyer", fileName: customFlyerName || flyerFile.name, data: base64, password };
+        // Create a base64 string
+        const reader = new FileReader();
+        reader.readAsDataURL(flyerFile);
+        await new Promise((resolve) => (reader.onload = resolve));
+        const base64 = (reader.result as string).split(',')[1];
+        payload = { type: "flyer", fileName: customFlyerName || flyerFile.name, data: base64, password };
       } else if (type === "eventsBrochure" && eventsBrochureFile) {
-         const reader = new FileReader();
-         reader.readAsDataURL(eventsBrochureFile);
-         await new Promise((resolve) => (reader.onload = resolve));
-         const base64 = (reader.result as string).split(',')[1];
-         payload = { type: "eventsBrochure", fileName: customEventsBrochureName || eventsBrochureFile.name, data: base64, password };
+        const reader = new FileReader();
+        reader.readAsDataURL(eventsBrochureFile);
+        await new Promise((resolve) => (reader.onload = resolve));
+        const base64 = (reader.result as string).split(',')[1];
+        payload = { type: "eventsBrochure", fileName: customEventsBrochureName || eventsBrochureFile.name, data: base64, password };
       }
 
       const res = await fetch("/api/save", {
@@ -80,7 +80,7 @@ export default function Admin() {
       });
 
       if (!res.ok) throw new Error("Failed to save changes");
-      
+
       setSaveMessage("Successfully saved! Vercel is now rebuilding the site.");
       setTimeout(() => setSaveMessage(""), 5000);
     } catch (err: any) {
@@ -131,288 +131,288 @@ export default function Admin() {
       <Navbar />
 
       <main className="flex-1 relative z-10 pt-24 pb-12">
-         <div className="max-w-7xl mx-auto px-6 w-full flex flex-col md:flex-row gap-8">
-            
-            {/* Sidebar Options hover:bg-white/5 border border-transparent hover:border-border text-muted-foreground hover:text-foreground */}
-            <div className="w-full md:w-64 flex flex-col gap-2">
-              <button 
-                onClick={() => setActiveTab("events")}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg text-left font-medium transition-colors ${activeTab === 'events' ? 'bg-primary/20 text-primary border border-primary/30' : 'hover:bg-white/5 border border-transparent hover:border-border text-muted-foreground hover:text-foreground'}`}>
-                <CalendarRange className="w-5 h-5" /> Events Timeline
-              </button>
-              <button 
-                onClick={() => setActiveTab("content")}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg text-left font-medium transition-colors ${activeTab === 'content' ? 'bg-primary/20 text-primary border border-primary/30' : 'hover:bg-white/5 border border-transparent hover:border-border text-muted-foreground hover:text-foreground'}`}>
-                <Settings className="w-5 h-5" /> About & Contacts
-              </button>
-              <button 
-                onClick={() => setActiveTab("flyer")}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg text-left font-medium transition-colors ${activeTab === 'flyer' ? 'bg-primary/20 text-primary border border-primary/30' : 'hover:bg-white/5 border border-transparent hover:border-border text-muted-foreground hover:text-foreground'}`}>
-                <Upload className="w-5 h-5" /> Flyer / Brochure
-              </button>
-            </div>
+        <div className="max-w-7xl mx-auto px-6 w-full flex flex-col md:flex-row gap-8">
 
-            {/* Content Area */}
-            <div className="flex-1 glass-subtle p-8 rounded-xl border border-border/50 bg-card/40">
-               {saveMessage && (
-                 <div className="mb-6 px-4 py-3 border border-primary/50 bg-primary/10 text-primary rounded-lg">
-                   {saveMessage}
-                 </div>
-               )}
+          {/* Sidebar Options hover:bg-white/5 border border-transparent hover:border-border text-muted-foreground hover:text-foreground */}
+          <div className="w-full md:w-64 flex flex-col gap-2">
+            <button
+              onClick={() => setActiveTab("events")}
+              className={`flex items-center gap-3 px-4 py-3 rounded-lg text-left font-medium transition-colors ${activeTab === 'events' ? 'bg-primary/20 text-primary border border-primary/30' : 'hover:bg-white/5 border border-transparent hover:border-border text-muted-foreground hover:text-foreground'}`}>
+              <CalendarRange className="w-5 h-5" /> Events Timeline
+            </button>
+            <button
+              onClick={() => setActiveTab("content")}
+              className={`flex items-center gap-3 px-4 py-3 rounded-lg text-left font-medium transition-colors ${activeTab === 'content' ? 'bg-primary/20 text-primary border border-primary/30' : 'hover:bg-white/5 border border-transparent hover:border-border text-muted-foreground hover:text-foreground'}`}>
+              <Settings className="w-5 h-5" /> About & Contacts
+            </button>
+            <button
+              onClick={() => setActiveTab("flyer")}
+              className={`flex items-center gap-3 px-4 py-3 rounded-lg text-left font-medium transition-colors ${activeTab === 'flyer' ? 'bg-primary/20 text-primary border border-primary/30' : 'hover:bg-white/5 border border-transparent hover:border-border text-muted-foreground hover:text-foreground'}`}>
+              <Upload className="w-5 h-5" /> Flyer / Brochure
+            </button>
+          </div>
 
-               {activeTab === "events" && (
-                 <div>
-                   <div className="flex items-center justify-between mb-8 pb-4 border-b border-border/50">
-                      <h2 className="text-2xl font-bold">Manage Events</h2>
-                      <button 
-                         onClick={() => handleSaveToGithub("timeline")}
-                         disabled={isSaving}
-                         className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-bold tracking-wider uppercase hover:bg-primary/90 transition-colors disabled:opacity-50">
-                        <Save className="w-4 h-4" /> Save Timeline
-                      </button>
-                   </div>
-                   
-                   <div className="space-y-8">
-                      {timeline.map((dayObj, dayIndex) => (
-                        <div key={dayIndex} className="bg-background/40 p-6 rounded-xl border border-border/50">
-                          <input 
-                             value={dayObj.day}
-                             onChange={(e) => {
-                               const newTimeline = [...timeline];
-                               newTimeline[dayIndex].day = e.target.value;
-                               setTimeline(newTimeline);
-                             }}
-                             className="text-xl font-bold bg-transparent border-b border-border/50 mb-4 focus:outline-none focus:border-primary w-full pb-1 text-primary"
-                          />
-                          <div className="space-y-4">
-                            {dayObj.events.map((evt, evtIndex) => (
-                              <div key={evtIndex} className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-background/60 p-4 rounded-lg border border-border/30 relative group">
-                                <button className="absolute top-2 right-2 text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
-                                  onClick={() => {
-                                    const newTimeline = [...timeline];
-                                    newTimeline[dayIndex].events.splice(evtIndex, 1);
-                                    setTimeline(newTimeline);
-                                  }}>
-                                  <Trash2 className="w-4 h-4" />
-                                </button>
-                                <div>
-                                  <label className="text-xs text-muted-foreground block mb-1">Name</label>
-                                  <input value={evt.name} onChange={(e) => {
-                                    const newTimeline = [...timeline];
-                                    newTimeline[dayIndex].events[evtIndex].name = e.target.value;
-                                    setTimeline(newTimeline);
-                                  }} className="w-full bg-background border border-border rounded px-3 py-2 text-sm focus:border-primary focus:outline-none" />
-                                </div>
-                                <div>
-                                  <label className="text-xs text-muted-foreground block mb-1">Time</label>
-                                  <input value={evt.time} onChange={(e) => {
-                                    const newTimeline = [...timeline];
-                                    newTimeline[dayIndex].events[evtIndex].time = e.target.value;
-                                    setTimeline(newTimeline);
-                                  }} className="w-full bg-background border border-border rounded px-3 py-2 text-sm focus:border-primary focus:outline-none" />
-                                </div>
-                                <div className="md:col-span-2">
-                                  <label className="text-xs text-muted-foreground block mb-1">Description (Optional)</label>
-                                  <textarea value={evt.description || ""} onChange={(e) => {
-                                    const newTimeline = [...timeline];
-                                    newTimeline[dayIndex].events[evtIndex].description = e.target.value;
-                                    setTimeline(newTimeline);
-                                  }} className="w-full bg-background border border-border rounded px-3 py-2 text-sm focus:border-primary focus:outline-none h-20" />
-                                </div>
-                              </div>
-                            ))}
-                            <button onClick={() => {
-                              const newTimeline = [...timeline];
-                              newTimeline[dayIndex].events.push({ id: `new-evt-${Date.now()}`, name: "New Event", time: "TBD" });
-                              setTimeline(newTimeline);
-                            }} className="w-full py-2 border border-dashed border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors rounded-lg flex justify-center items-center gap-2 text-sm">
-                              <Plus className="w-4 h-4" /> Add Event to {dayObj.day}
+          {/* Content Area */}
+          <div className="flex-1 glass-subtle p-8 rounded-xl border border-border/50 bg-card/40">
+            {saveMessage && (
+              <div className="mb-6 px-4 py-3 border border-primary/50 bg-primary/10 text-primary rounded-lg">
+                {saveMessage}
+              </div>
+            )}
+
+            {activeTab === "events" && (
+              <div>
+                <div className="flex items-center justify-between mb-8 pb-4 border-b border-border/50">
+                  <h2 className="text-2xl font-bold">Manage Events</h2>
+                  <button
+                    onClick={() => handleSaveToGithub("timeline")}
+                    disabled={isSaving}
+                    className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-bold tracking-wider uppercase hover:bg-primary/90 transition-colors disabled:opacity-50">
+                    <Save className="w-4 h-4" /> Save Timeline
+                  </button>
+                </div>
+
+                <div className="space-y-8">
+                  {timeline.map((dayObj, dayIndex) => (
+                    <div key={dayIndex} className="bg-background/40 p-6 rounded-xl border border-border/50">
+                      <input
+                        value={dayObj.day}
+                        onChange={(e) => {
+                          const newTimeline = [...timeline];
+                          newTimeline[dayIndex].day = e.target.value;
+                          setTimeline(newTimeline);
+                        }}
+                        className="text-xl font-bold bg-transparent border-b border-border/50 mb-4 focus:outline-none focus:border-primary w-full pb-1 text-primary"
+                      />
+                      <div className="space-y-4">
+                        {dayObj.events.map((evt, evtIndex) => (
+                          <div key={evtIndex} className="grid grid-cols-1 md:grid-cols-2 gap-4 bg-background/60 p-4 rounded-lg border border-border/30 relative group">
+                            <button className="absolute top-2 right-2 text-red-400 opacity-0 group-hover:opacity-100 transition-opacity"
+                              onClick={() => {
+                                const newTimeline = [...timeline];
+                                newTimeline[dayIndex].events.splice(evtIndex, 1);
+                                setTimeline(newTimeline);
+                              }}>
+                              <Trash2 className="w-4 h-4" />
                             </button>
+                            <div>
+                              <label className="text-xs text-muted-foreground block mb-1">Name</label>
+                              <input value={evt.name} onChange={(e) => {
+                                const newTimeline = [...timeline];
+                                newTimeline[dayIndex].events[evtIndex].name = e.target.value;
+                                setTimeline(newTimeline);
+                              }} className="w-full bg-background border border-border rounded px-3 py-2 text-sm focus:border-primary focus:outline-none" />
+                            </div>
+                            <div>
+                              <label className="text-xs text-muted-foreground block mb-1">Time</label>
+                              <input value={evt.time} onChange={(e) => {
+                                const newTimeline = [...timeline];
+                                newTimeline[dayIndex].events[evtIndex].time = e.target.value;
+                                setTimeline(newTimeline);
+                              }} className="w-full bg-background border border-border rounded px-3 py-2 text-sm focus:border-primary focus:outline-none" />
+                            </div>
+                            <div className="md:col-span-2">
+                              <label className="text-xs text-muted-foreground block mb-1">Description (Optional)</label>
+                              <textarea value={evt.description || ""} onChange={(e) => {
+                                const newTimeline = [...timeline];
+                                newTimeline[dayIndex].events[evtIndex].description = e.target.value;
+                                setTimeline(newTimeline);
+                              }} className="w-full bg-background border border-border rounded px-3 py-2 text-sm focus:border-primary focus:outline-none h-20" />
+                            </div>
                           </div>
+                        ))}
+                        <button onClick={() => {
+                          const newTimeline = [...timeline];
+                          newTimeline[dayIndex].events.push({ id: `new-evt-${Date.now()}`, name: "New Event", time: "TBD" });
+                          setTimeline(newTimeline);
+                        }} className="w-full py-2 border border-dashed border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 transition-colors rounded-lg flex justify-center items-center gap-2 text-sm">
+                          <Plus className="w-4 h-4" /> Add Event to {dayObj.day}
+                        </button>
+                      </div>
+                    </div>
+                  ))}
+
+                  <button onClick={() => {
+                    setTimeline([...timeline, { day: "New Day", events: [] }]);
+                  }} className="w-full py-4 border-2 border-dashed border-border/50 text-foreground font-medium hover:text-primary hover:border-primary/50 transition-colors rounded-xl flex justify-center items-center gap-2">
+                    <Plus className="w-5 h-5" /> Add New Day
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {activeTab === "content" && (
+              <div>
+                <div className="flex items-center justify-between mb-8 pb-4 border-b border-border/50">
+                  <h2 className="text-2xl font-bold">About & Contacts</h2>
+                  <button
+                    onClick={() => handleSaveToGithub("content")}
+                    disabled={isSaving}
+                    className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-bold tracking-wider uppercase hover:bg-primary/90 transition-colors disabled:opacity-50">
+                    <Save className="w-4 h-4" /> Save Content
+                  </button>
+                </div>
+
+                <div className="space-y-6">
+                  <div>
+                    <label className="text-sm font-bold text-foreground mb-2 block">About Us Text</label>
+                    <textarea
+                      className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground focus:border-primary focus:outline-none h-40 font-light leading-relaxed"
+                      value={content.aboutUsText}
+                      onChange={(e) => setContent({ ...content, aboutUsText: e.target.value })}
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-bold text-foreground mb-2 block">Brochure/Flyer Link (e.g. /my-flyer.pdf)</label>
+                    <input
+                      type="text"
+                      className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground focus:border-primary focus:outline-none"
+                      value={content.flyerLink}
+                      onChange={(e) => setContent({ ...content, flyerLink: e.target.value })}
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">Make sure this matches the filename you upload in the Flyer tab.</p>
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-bold text-foreground mb-2 block">Events Brochure Link (e.g. /events-brochure.pdf)</label>
+                    <input
+                      type="text"
+                      className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground focus:border-primary focus:outline-none"
+                      value={content.eventsBrochureLink}
+                      onChange={(e) => setContent({ ...content, eventsBrochureLink: e.target.value })}
+                    />
+                    <p className="text-xs text-muted-foreground mt-1">Make sure this matches the filename you upload in the Flyer tab.</p>
+                  </div>
+
+                  <div>
+                    <label className="text-sm font-bold text-foreground mb-2 block">Contact Email</label>
+                    <input
+                      type="email"
+                      className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground focus:border-primary focus:outline-none"
+                      value={content.contactEmail}
+                      onChange={(e) => setContent({ ...content, contactEmail: e.target.value })}
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {activeTab === "flyer" && (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                {/* Main Flyer Uploader */}
+                <div>
+                  <div className="flex items-center justify-between mb-8 pb-4 border-b border-border/50">
+                    <h2 className="text-2xl font-bold">Main Flyer</h2>
+                    <button
+                      onClick={() => handleSaveToGithub("flyer")}
+                      disabled={isSaving || !flyerFile}
+                      className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-bold tracking-wider uppercase hover:bg-primary/90 transition-colors disabled:opacity-50">
+                      <Save className="w-4 h-4" /> Upload
+                    </button>
+                  </div>
+
+                  <div className="space-y-8">
+                    <div className="border-2 border-dashed border-border/50 rounded-xl p-8 text-center flex flex-col items-center justify-center bg-background/30 hover:bg-background/50 transition-colors">
+                      <input
+                        type="file"
+                        id="flyer-upload"
+                        className="hidden"
+                        accept="application/pdf"
+                        onChange={(e) => {
+                          if (e.target.files && e.target.files.length > 0) {
+                            const file = e.target.files[0];
+                            setFlyerFile(file);
+                            setCustomFlyerName(file.name);
+                          }
+                        }}
+                      />
+                      <label htmlFor="flyer-upload" className="cursor-pointer flex flex-col items-center">
+                        <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-4 cursor-pointer text-primary hover:bg-primary hover:text-primary-foreground transition-all">
+                          <Upload className="w-8 h-8" />
                         </div>
-                      ))}
-                      
-                      <button onClick={() => {
-                         setTimeline([...timeline, { day: "New Day", events: [] }]);
-                      }} className="w-full py-4 border-2 border-dashed border-border/50 text-foreground font-medium hover:text-primary hover:border-primary/50 transition-colors rounded-xl flex justify-center items-center gap-2">
-                        <Plus className="w-5 h-5" /> Add New Day
-                      </button>
-                   </div>
-                 </div>
-               )}
+                        <h3 className="text-xl font-bold mb-2 cursor-pointer">Select a PDF</h3>
+                        <p className="text-muted-foreground text-sm cursor-pointer">
+                          {flyerFile ? <span className="text-primary font-medium">{flyerFile.name} ready</span> : "Click to browse"}
+                        </p>
+                      </label>
+                    </div>
 
-               {activeTab === "content" && (
-                 <div>
-                   <div className="flex items-center justify-between mb-8 pb-4 border-b border-border/50">
-                      <h2 className="text-2xl font-bold">About & Contacts</h2>
-                      <button 
-                        onClick={() => handleSaveToGithub("content")}
-                        disabled={isSaving}
-                        className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-bold tracking-wider uppercase hover:bg-primary/90 transition-colors disabled:opacity-50">
-                        <Save className="w-4 h-4" /> Save Content
-                      </button>
-                   </div>
-                   
-                   <div className="space-y-6">
-                      <div>
-                        <label className="text-sm font-bold text-foreground mb-2 block">About Us Text</label>
-                        <textarea 
-                           className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground focus:border-primary focus:outline-none h-40 font-light leading-relaxed"
-                           value={content.aboutUsText}
-                           onChange={(e) => setContent({...content, aboutUsText: e.target.value})}
+                    {flyerFile && (
+                      <div className="bg-background/60 p-6 rounded-xl border border-border/50">
+                        <label className="text-sm font-bold text-foreground mb-2 block">Save flyer as:</label>
+                        <input
+                          type="text"
+                          className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground focus:border-primary focus:outline-none"
+                          value={customFlyerName}
+                          onChange={(e) => setCustomFlyerName(e.target.value)}
                         />
+                        <p className="text-sm text-yellow-500 mt-2">
+                          Remember to update the <b>Flyer Link</b> in Content to <code>/main/{customFlyerName || "filename.pdf"}</code>
+                        </p>
                       </div>
-                      
-                      <div>
-                        <label className="text-sm font-bold text-foreground mb-2 block">Brochure/Flyer Link (e.g. /my-flyer.pdf)</label>
-                        <input 
-                           type="text"
-                           className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground focus:border-primary focus:outline-none"
-                           value={content.flyerLink}
-                           onChange={(e) => setContent({...content, flyerLink: e.target.value})}
+                    )}
+                  </div>
+                </div>
+
+                {/* Events Brochure Uploader */}
+                <div>
+                  <div className="flex items-center justify-between mb-8 pb-4 border-b border-border/50">
+                    <h2 className="text-2xl font-bold">Events Brochure</h2>
+                    <button
+                      onClick={() => handleSaveToGithub("eventsBrochure")}
+                      disabled={isSaving || !eventsBrochureFile}
+                      className="flex items-center gap-2 bg-secondary text-secondary-foreground px-4 py-2 rounded-lg text-sm font-bold tracking-wider uppercase hover:bg-secondary/90 transition-colors disabled:opacity-50">
+                      <Save className="w-4 h-4" /> Upload
+                    </button>
+                  </div>
+
+                  <div className="space-y-8">
+                    <div className="border-2 border-dashed border-border/50 rounded-xl p-8 text-center flex flex-col items-center justify-center bg-background/30 hover:bg-background/50 transition-colors">
+                      <input
+                        type="file"
+                        id="events-upload"
+                        className="hidden"
+                        accept="application/pdf"
+                        onChange={(e) => {
+                          if (e.target.files && e.target.files.length > 0) {
+                            const file = e.target.files[0];
+                            setEventsBrochureFile(file);
+                            setCustomEventsBrochureName(file.name);
+                          }
+                        }}
+                      />
+                      <label htmlFor="events-upload" className="cursor-pointer flex flex-col items-center">
+                        <div className="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mb-4 cursor-pointer text-secondary hover:bg-secondary hover:text-secondary-foreground transition-all">
+                          <Upload className="w-8 h-8" />
+                        </div>
+                        <h3 className="text-xl font-bold mb-2 cursor-pointer">Select a PDF</h3>
+                        <p className="text-muted-foreground text-sm cursor-pointer">
+                          {eventsBrochureFile ? <span className="text-secondary font-medium">{eventsBrochureFile.name} ready</span> : "Click to browse"}
+                        </p>
+                      </label>
+                    </div>
+
+                    {eventsBrochureFile && (
+                      <div className="bg-background/60 p-6 rounded-xl border border-border/50">
+                        <label className="text-sm font-bold text-foreground mb-2 block">Save events brochure as:</label>
+                        <input
+                          type="text"
+                          className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground focus:border-primary focus:outline-none"
+                          value={customEventsBrochureName}
+                          onChange={(e) => setCustomEventsBrochureName(e.target.value)}
                         />
-                        <p className="text-xs text-muted-foreground mt-1">Make sure this matches the filename you upload in the Flyer tab.</p>
+                        <p className="text-sm text-yellow-500 mt-2">
+                          ⚠️ Remember to update the <b>Events Brochure Link</b> in Content to <code>/events/{customEventsBrochureName || "filename.pdf"}</code>
+                        </p>
                       </div>
-                      
-                      <div>
-                        <label className="text-sm font-bold text-foreground mb-2 block">Events Brochure Link (e.g. /events-brochure.pdf)</label>
-                        <input 
-                           type="text"
-                           className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground focus:border-primary focus:outline-none"
-                           value={content.eventsBrochureLink}
-                           onChange={(e) => setContent({...content, eventsBrochureLink: e.target.value})}
-                        />
-                        <p className="text-xs text-muted-foreground mt-1">Make sure this matches the filename you upload in the Flyer tab.</p>
-                      </div>
-                      
-                      <div>
-                        <label className="text-sm font-bold text-foreground mb-2 block">Contact Email</label>
-                        <input 
-                           type="email"
-                           className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground focus:border-primary focus:outline-none"
-                           value={content.contactEmail}
-                           onChange={(e) => setContent({...content, contactEmail: e.target.value})}
-                        />
-                      </div>
-                   </div>
-                 </div>
-               )}
-
-               {activeTab === "flyer" && (
-                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-                   {/* Main Flyer Uploader */}
-                   <div>
-                     <div className="flex items-center justify-between mb-8 pb-4 border-b border-border/50">
-                        <h2 className="text-2xl font-bold">Main Flyer</h2>
-                        <button 
-                           onClick={() => handleSaveToGithub("flyer")}
-                           disabled={isSaving || !flyerFile}
-                           className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-bold tracking-wider uppercase hover:bg-primary/90 transition-colors disabled:opacity-50">
-                          <Save className="w-4 h-4" /> Upload
-                        </button>
-                     </div>
-                     
-                     <div className="space-y-8">
-                       <div className="border-2 border-dashed border-border/50 rounded-xl p-8 text-center flex flex-col items-center justify-center bg-background/30 hover:bg-background/50 transition-colors">
-                          <input 
-                             type="file" 
-                             id="flyer-upload" 
-                             className="hidden" 
-                             accept="application/pdf"
-                             onChange={(e) => {
-                               if (e.target.files && e.target.files.length > 0) {
-                                 const file = e.target.files[0];
-                                 setFlyerFile(file);
-                                 setCustomFlyerName(file.name);
-                               }
-                             }}
-                          />
-                          <label htmlFor="flyer-upload" className="cursor-pointer flex flex-col items-center">
-                             <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-4 cursor-pointer text-primary hover:bg-primary hover:text-primary-foreground transition-all">
-                               <Upload className="w-8 h-8" />
-                             </div>
-                             <h3 className="text-xl font-bold mb-2 cursor-pointer">Select a PDF</h3>
-                             <p className="text-muted-foreground text-sm cursor-pointer">
-                               {flyerFile ? <span className="text-primary font-medium">{flyerFile.name} ready</span> : "Click to browse"}
-                             </p>
-                          </label>
-                       </div>
-
-                       {flyerFile && (
-                         <div className="bg-background/60 p-6 rounded-xl border border-border/50">
-                           <label className="text-sm font-bold text-foreground mb-2 block">Save flyer as:</label>
-                           <input 
-                             type="text"
-                             className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground focus:border-primary focus:outline-none"
-                             value={customFlyerName}
-                             onChange={(e) => setCustomFlyerName(e.target.value)}
-                           />
-                           <p className="text-sm text-yellow-500 mt-2">
-                             ⚠️ Remember to update the <b>Flyer Link</b> in Content.
-                           </p>
-                         </div>
-                       )}
-                     </div>
-                   </div>
-
-                   {/* Events Brochure Uploader */}
-                   <div>
-                     <div className="flex items-center justify-between mb-8 pb-4 border-b border-border/50">
-                        <h2 className="text-2xl font-bold">Events Brochure</h2>
-                        <button 
-                           onClick={() => handleSaveToGithub("eventsBrochure")}
-                           disabled={isSaving || !eventsBrochureFile}
-                           className="flex items-center gap-2 bg-secondary text-secondary-foreground px-4 py-2 rounded-lg text-sm font-bold tracking-wider uppercase hover:bg-secondary/90 transition-colors disabled:opacity-50">
-                          <Save className="w-4 h-4" /> Upload
-                        </button>
-                     </div>
-                     
-                     <div className="space-y-8">
-                       <div className="border-2 border-dashed border-border/50 rounded-xl p-8 text-center flex flex-col items-center justify-center bg-background/30 hover:bg-background/50 transition-colors">
-                          <input 
-                             type="file" 
-                             id="events-upload" 
-                             className="hidden" 
-                             accept="application/pdf"
-                             onChange={(e) => {
-                               if (e.target.files && e.target.files.length > 0) {
-                                 const file = e.target.files[0];
-                                 setEventsBrochureFile(file);
-                                 setCustomEventsBrochureName(file.name);
-                               }
-                             }}
-                          />
-                          <label htmlFor="events-upload" className="cursor-pointer flex flex-col items-center">
-                             <div className="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mb-4 cursor-pointer text-secondary hover:bg-secondary hover:text-secondary-foreground transition-all">
-                               <Upload className="w-8 h-8" />
-                             </div>
-                             <h3 className="text-xl font-bold mb-2 cursor-pointer">Select a PDF</h3>
-                             <p className="text-muted-foreground text-sm cursor-pointer">
-                               {eventsBrochureFile ? <span className="text-secondary font-medium">{eventsBrochureFile.name} ready</span> : "Click to browse"}
-                             </p>
-                          </label>
-                       </div>
-
-                       {eventsBrochureFile && (
-                         <div className="bg-background/60 p-6 rounded-xl border border-border/50">
-                           <label className="text-sm font-bold text-foreground mb-2 block">Save events brochure as:</label>
-                           <input 
-                             type="text"
-                             className="w-full bg-background border border-border rounded-lg px-4 py-3 text-foreground focus:border-primary focus:outline-none"
-                             value={customEventsBrochureName}
-                             onChange={(e) => setCustomEventsBrochureName(e.target.value)}
-                           />
-                           <p className="text-sm text-yellow-500 mt-2">
-                             ⚠️ Remember to update the <b>Events Brochure Link</b> in Content.
-                           </p>
-                         </div>
-                       )}
-                     </div>
-                   </div>
-                 </div>
-               )}
-            </div>
-         </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       </main>
     </div>
   );

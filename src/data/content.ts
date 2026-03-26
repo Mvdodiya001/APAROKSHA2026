@@ -14,8 +14,8 @@ export interface SiteContent {
 
 export const contentData: SiteContent = {
   aboutUsText: "Aparoksha isn't just another tech fest — it's a real test of your skills. Whether you're cracking challenges in the CTF, building smart predictive models in Ex-Machina, or battling it out in the Coding Premier League, this is where the best minds come to push their limits. So, are you ready to play?",
-  flyerLink: "/brochure-placeholder.pdf",
-  eventsBrochureLink: "/events-brochure-placeholder.pdf",
+  flyerLink: "/main/APK_timeline.pdf",
+  eventsBrochureLink: "/events/APK_events.pdf",
   contactEmail: "team.aparoksha@iiita.ac.in",
   studentCoordinators: [
     { name: "Ashutosh", phone: "+91 85275 79527" },

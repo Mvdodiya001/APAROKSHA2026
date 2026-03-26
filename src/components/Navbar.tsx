@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "../lib/utils";
 import ApkLogo from "../assets/Apk Logo.png";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -16,9 +17,9 @@ const Navbar = () => {
   }, []);
 
   const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Timeline", href: "#timeline" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", href: "/#about" },
+    { name: "Timeline", href: "/#timeline" },
+    { name: "Contact", href: "/#contact" },
   ];
 
   return (
@@ -32,8 +33,8 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between">
-          <a
-            href="#"
+          <Link
+            to="/"
             className="flex flex-col select-none group focus:outline-none"
           >
             <span className="text-2xl font-bold tracking-tighter text-glow-primary flex items-center gap-3">
@@ -43,7 +44,7 @@ const Navbar = () => {
             <span className="text-[10px] tracking-[0.2em] text-primary/80 uppercase font-mono group-hover:text-primary transition-colors mt-1">
               The Ultimate Tech Fest
             </span>
-          </a>
+          </Link>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex items-center space-x-8">
@@ -57,19 +58,17 @@ const Navbar = () => {
                 <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-primary transition-all group-hover:w-full" />
               </a>
             ))}
-            <a
-              href="/brochure-placeholder.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/brochure"
               className="cyber-button px-6 py-2 border border-primary/50 text-foreground hover:border-primary transition-all group text-sm shrink-0"
             >
               <span className="relative z-10 flex items-center space-x-2">
-                <span>EVENT FLYER</span>
+                <span>FLYER</span>
                 <span className="font-mono text-primary group-hover:translate-x-1 transition-transform">
                   _&gt;
                 </span>
               </span>
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -99,15 +98,13 @@ const Navbar = () => {
                 {link.name}
               </a>
             ))}
-            <a
-              href="/brochure-placeholder.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              to="/brochure"
               onClick={() => setIsOpen(false)}
               className="mt-4 cyber-button px-6 py-3 border border-primary/50 text-center uppercase text-sm tracking-widest"
             >
               Event Flyer
-            </a>
+            </Link>
           </div>
         </div>
       </div>

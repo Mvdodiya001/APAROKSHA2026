@@ -41,7 +41,7 @@ export default function Brochure() {
                   <a href={contentData.flyerLink} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-transparent border border-border text-foreground font-bold tracking-wider rounded-lg hover:bg-white/5 transition-all text-sm flex items-center justify-center">
                     Preview
                   </a>
-                  <a href={contentData.flyerLink} download className="px-6 py-3 bg-primary border border-primary text-primary-foreground font-bold tracking-wider rounded-lg hover:shadow-glow-primary transition-all text-sm flex items-center justify-center gap-2">
+                  <a href={contentData.flyerLink} target="_blank" rel="noopener noreferrer" download="APK_timeline.pdf" className="px-6 py-3 bg-primary border border-primary text-primary-foreground font-bold tracking-wider rounded-lg hover:shadow-glow-primary transition-all text-sm flex items-center justify-center gap-2">
                     <DownloadIcon className="w-4 h-4" /> Download
                   </a>
                 </div>
@@ -61,7 +61,7 @@ export default function Brochure() {
                   <a href={contentData.eventsBrochureLink} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-transparent border border-border text-foreground font-bold tracking-wider rounded-lg hover:bg-white/5 transition-all text-sm flex items-center justify-center">
                     Preview
                   </a>
-                  <a href={contentData.eventsBrochureLink} download className="px-6 py-3 bg-secondary border border-secondary text-secondary-foreground font-bold tracking-wider rounded-lg hover:shadow-[0_0_20px_rgba(var(--secondary),0.5)] transition-all text-sm flex items-center justify-center gap-2">
+                  <a href={contentData.eventsBrochureLink} target="_blank" rel="noopener noreferrer" download="APK_Events_Brochure.pdf" className="px-6 py-3 bg-secondary border border-secondary text-secondary-foreground font-bold tracking-wider rounded-lg hover:shadow-[0_0_20px_rgba(var(--secondary),0.5)] transition-all text-sm flex items-center justify-center gap-2">
                     <DownloadIcon className="w-4 h-4" /> Download
                   </a>
                 </div>

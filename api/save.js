@@ -1,8 +1,8 @@
 export default async function handler(req, res) {
   if (req.method !== "POST") return res.status(405).json({ error: "Method not allowed" });
-  
+
   const { type, data, password, fileName } = req.body;
-  
+
   // 1. Password Verification (Removed VITE_ prefix so it isn't bundled into the frontend)
   if (password !== process.env.ADMIN_PASSWORD) {
     return res.status(401).json({ error: "Unauthorized - Invalid Password" });
@@ -29,16 +29,16 @@ export default async function handler(req, res) {
     fileContent = `export interface Coordinator {\n  name: string;\n  phone: string;\n}\n\nexport interface SiteContent {\n  aboutUsText: string;\n  flyerLink: string;\n  eventsBrochureLink: string;\n  contactEmail: string;\n  studentCoordinators: Coordinator[];\n  facultyIncharge: Coordinator[];\n}\n\nexport const contentData: SiteContent = ${JSON.stringify(data, null, 2)};\n`;
     commitMessage = "Update site content via Admin Panel";
   } else if (type === "flyer") {
-    // SECURITY PATCH: Sanitize fileName to prevent Path Traversal attacks (e.g., ../../package.json)
+    // SECURITY PATCH: Sanitize fileName to prevent Path Traversal attacks
     const sanitizedFileName = (fileName || "uploaded-flyer.pdf").replace(/[^a-zA-Z0-9.\-_]/g, "");
-    filePath = `public/${sanitizedFileName}`;
-    fileContent = data; // Data is already coming as base64 string from the frontend
-    commitMessage = `Upload brochure ${sanitizedFileName} via Admin Panel`;
+    filePath = `public/main/${sanitizedFileName}`;
+    fileContent = data;
+    commitMessage = `Upload brochure ${sanitizedFileName} to main/ via Admin Panel`;
   } else if (type === "eventsBrochure") {
     const sanitizedFileName = (fileName || "events-brochure.pdf").replace(/[^a-zA-Z0-9.\-_]/g, "");
-    filePath = `public/${sanitizedFileName}`;
+    filePath = `public/events/${sanitizedFileName}`;
     fileContent = data;
-    commitMessage = `Upload events brochure ${sanitizedFileName} via Admin Panel`;
+    commitMessage = `Upload events brochure ${sanitizedFileName} to events/ via Admin Panel`;
   } else {
     return res.status(400).json({ error: "Invalid type" });
   }
@@ -56,7 +56,7 @@ export default async function handler(req, res) {
 
     // 5. Commit to GitHub
     const contentToEncode = type === "flyer" ? fileContent : Buffer.from(fileContent).toString('base64');
-    
+
     const updateRes = await fetch(`https://api.github.com/repos/${GITHUB_REPO}/contents/${filePath}`, {
       method: "PUT",
       headers: {
