@@ -29,7 +29,7 @@ export const timelineData: TimelineDay[] = [
       {
         "id": "cicada-ending",
         "name": "Cicada",
-        "time": "4:00am (Ending)"
+        "time": "4:10am (Ending)"
       },
       {
         "id": "inauguration",
