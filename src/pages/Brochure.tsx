@@ -2,9 +2,24 @@ import BinaryBackground from "../components/BinaryBackground";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Download as DownloadIcon, FileText } from "lucide-react";
-import { contentData } from "../data/content";
-
+import { useContent } from "../hooks/useSiteData";
+import { Loader2 } from "lucide-react";
 export default function Brochure() {
+  const { contentData, loading } = useContent();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col relative bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground">
+        <BinaryBackground />
+        <Navbar />
+        <main className="flex-1 relative z-10 flex flex-col items-center justify-center pt-24 pb-12 px-6">
+          <Loader2 className="w-12 h-12 text-primary animate-spin opacity-50" />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col relative bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground">
       <BinaryBackground />

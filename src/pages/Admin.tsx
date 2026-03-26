@@ -1,21 +1,33 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import BinaryBackground from "../components/BinaryBackground";
 import Navbar from "../components/Navbar";
-import { Lock, Unlock, Upload, Settings, CalendarRange, Plus, Trash2, Save } from "lucide-react";
-import { timelineData as initialTimeline, TimelineDay } from "../data/timeline";
-import { contentData as initialContent, SiteContent } from "../data/content";
+import { Lock, Unlock, Upload, Settings, CalendarRange, Plus, Trash2, Save, Loader2 } from "lucide-react";
+import { TimelineDay } from "../data/timeline";
+import { SiteContent } from "../data/content";
+import { useTimeline, useContent } from "../hooks/useSiteData";
 
 export default function Admin() {
+  const { timelineData: fetchedTimeline, loading: timelineLoading } = useTimeline();
+  const { contentData: fetchedContent, loading: contentLoading } = useContent();
+
   const [password, setPassword] = useState("");
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [error, setError] = useState("");
   const [activeTab, setActiveTab] = useState<"events" | "content" | "flyer">("events");
 
   // State for Timeline
-  const [timeline, setTimeline] = useState<TimelineDay[]>(initialTimeline);
+  const [timeline, setTimeline] = useState<TimelineDay[]>(fetchedTimeline);
 
   // State for Content
-  const [content, setContent] = useState<SiteContent>(initialContent);
+  const [content, setContent] = useState<SiteContent>(fetchedContent);
+
+  useEffect(() => {
+    if (!timelineLoading) setTimeline(fetchedTimeline);
+  }, [fetchedTimeline, timelineLoading]);
+
+  useEffect(() => {
+    if (!contentLoading) setContent(fetchedContent);
+  }, [fetchedContent, contentLoading]);
 
   // State for Flyer (to upload)
   const [flyerFile, setFlyerFile] = useState<File | null>(null);
@@ -90,6 +102,18 @@ export default function Admin() {
       setIsSaving(false);
     }
   };
+
+  if (timelineLoading || contentLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background relative selection:bg-primary/30 selection:text-primary-foreground">
+        <BinaryBackground />
+        <div className="z-10 flex flex-col items-center gap-4 text-primary">
+          <Loader2 className="w-12 h-12 animate-spin opacity-80" />
+          <p className="text-sm tracking-wider opacity-60 uppercase">Loading Secure Data</p>
+        </div>
+      </div>
+    );
+  }
 
   if (!isAuthenticated) {
     return (

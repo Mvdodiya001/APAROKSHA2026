@@ -3,10 +3,26 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import Timeline from "../components/Timeline";
 import { Mail, Phone } from "lucide-react";
-import { contentData } from "../data/content";
+import { useContent } from "../hooks/useSiteData";
+import { Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+  const { contentData, loading } = useContent();
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col relative bg-background text-foreground">
+        <BinaryBackground />
+        <Navbar />
+        <main className="flex-1 relative z-10 flex items-center justify-center">
+          <Loader2 className="w-12 h-12 text-primary animate-spin opacity-50" />
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen flex flex-col relative bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground">
       <BinaryBackground />

@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CalendarClock, ArrowUpRight, ChevronDown } from "lucide-react";
-import { timelineData, TimelineEvent } from "../data/timeline";
+import { TimelineEvent } from "../data/timeline";
+import { useTimeline } from "../hooks/useSiteData";
+import { Loader2 } from "lucide-react";
 import { cn } from "../lib/utils";
 
 const Snapcard = ({ event, index }: { event: TimelineEvent; index: number }) => {
@@ -80,6 +82,16 @@ const Snapcard = ({ event, index }: { event: TimelineEvent; index: number }) => 
 };
 
 const Timeline = () => {
+  const { timelineData, loading } = useTimeline();
+
+  if (loading) {
+    return (
+      <section id="timeline" className="py-24 relative overflow-hidden min-h-[50vh] flex items-center justify-center">
+        <Loader2 className="w-12 h-12 text-primary animate-spin opacity-50" />
+      </section>
+    );
+  }
+
   return (
     <section id="timeline" className="py-24 relative overflow-hidden">
       {/* Background glow effects */}
