@@ -44,6 +44,7 @@ export default function Admin() {
         setError(errorData.error || "Invalid password");
       }
     } catch (err) {
+      console.error(err);
       setError("An error occurred. Make sure you are running via vercel edge functions or have an active internet connection.");
     }
   };
@@ -83,8 +84,8 @@ export default function Admin() {
 
       setSaveMessage("Successfully saved! Vercel is now rebuilding the site.");
       setTimeout(() => setSaveMessage(""), 5000);
-    } catch (err: any) {
-      setSaveMessage(`Error: ${err.message}`);
+    } catch (err: unknown) {
+      setSaveMessage(`Error: ${err instanceof Error ? err.message : String(err)}`);
     } finally {
       setIsSaving(false);
     }

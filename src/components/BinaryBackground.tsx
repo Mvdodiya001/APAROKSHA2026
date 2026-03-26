@@ -11,17 +11,17 @@ interface Star {
   twinkleSpeed: number;
 }
 
+const colors = [
+  'hsl(200, 100%, 55%)', // primary electric blue
+  'hsl(265, 85%, 65%)',  // secondary elegant violet
+  'hsl(210, 20%, 98%)'   // foreground white
+];
+
 const NeonStarsBackground = memo(() => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const starsRef = useRef<Star[]>([]);
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const animationRef = useRef<number>();
-
-  const colors = [
-    'hsl(200, 100%, 55%)', // primary electric blue
-    'hsl(265, 85%, 65%)',  // secondary elegant violet
-    'hsl(210, 20%, 98%)'   // foreground white
-  ];
 
   const initStars = useCallback((canvas: HTMLCanvasElement) => {
     const stars: Star[] = [];
