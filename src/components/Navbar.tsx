@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Menu, X } from "lucide-react";
 import { cn } from "../lib/utils";
-import ApkLogo from "../assets/Apk Logo.png";
+import ApkLogo from "../assets/Apk-Logo.svg";
 import { Link } from "react-router-dom";
 
 const Navbar = () => {
