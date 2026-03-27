@@ -30,6 +30,7 @@ export default function Brochure() {
       <Helmet>
         <title>Aparoksha | Brochures & Downloads</title>
         <meta name="description" content="Download the main flyer and schedules for Aparoksha'26 of IIIT Allahabad." />
+        <link rel="canonical" href="https://aparoksha.iiita.ac.in/brochure" />
       </Helmet>
       <BinaryBackground />
       <Navbar />

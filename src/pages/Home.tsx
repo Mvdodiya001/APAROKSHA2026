@@ -32,6 +32,7 @@ const Home = () => {
       <Helmet>
         <title>Aparoksha | The Ultimate Tech Fest</title>
         <meta name="description" content="Aparoksha is the annual technical festival of IIIT Allahabad. Join us for coding, cyber security, AI events, hardware hackathons, and immense fun." />
+        <link rel="canonical" href="https://aparoksha.iiita.ac.in/" />
       </Helmet>
       <BinaryBackground />
 
