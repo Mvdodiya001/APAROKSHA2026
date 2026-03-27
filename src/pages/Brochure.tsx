@@ -41,9 +41,9 @@ export default function Brochure() {
               Discover all the events, schedules, rules, and details about Aparoksha'26 of IIIT Allahabad.
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
+            <div className="flex justify-center w-full">
               {/* Main Flyer Card */}
-              <div className="bg-background/40 border border-border/50 p-8 rounded-2xl flex flex-col items-center group hover:bg-background/60 transition-colors">
+              <div className="bg-background/40 border border-border/50 p-8 rounded-2xl flex flex-col items-center group hover:bg-background/60 transition-colors max-w-md w-full">
                 <div className="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mb-6 border border-primary/30 shadow-[0_0_20px_rgba(var(--primary),0.3)] group-hover:scale-110 transition-transform">
                   <FileText className="w-8 h-8 text-primary" />
                 </div>
@@ -57,26 +57,6 @@ export default function Brochure() {
                     Preview
                   </a>
                   <a href={contentData.flyerLink} target="_blank" rel="noopener noreferrer" download="APK_timeline.pdf" className="px-6 py-3 bg-primary border border-primary text-primary-foreground font-bold tracking-wider rounded-lg hover:shadow-glow-primary transition-all text-sm flex items-center justify-center gap-2">
-                    <DownloadIcon className="w-4 h-4" /> Download
-                  </a>
-                </div>
-              </div>
-
-              {/* Events Brochure Card */}
-              <div className="bg-background/40 border border-border/50 p-8 rounded-2xl flex flex-col items-center group hover:bg-background/60 transition-colors">
-                <div className="w-16 h-16 bg-secondary/20 rounded-full flex items-center justify-center mb-6 border border-secondary/30 shadow-[0_0_20px_rgba(var(--secondary),0.3)] group-hover:scale-110 transition-transform">
-                  <FileText className="w-8 h-8 text-secondary" />
-                </div>
-                <h3 className="text-2xl font-bold mb-2">Events Brochure</h3>
-                <p className="text-muted-foreground text-sm mb-8 text-center">
-                  Detailed rules, prize pools, and structure for every event.
-                </p>
-
-                <div className="mt-auto flex flex-col sm:flex-row gap-3 w-full justify-center">
-                  <a href={contentData.eventsBrochureLink} target="_blank" rel="noopener noreferrer" className="px-6 py-3 bg-transparent border border-border text-foreground font-bold tracking-wider rounded-lg hover:bg-white/5 transition-all text-sm flex items-center justify-center">
-                    Preview
-                  </a>
-                  <a href={contentData.eventsBrochureLink} target="_blank" rel="noopener noreferrer" download="APK_Events_Brochure.pdf" className="px-6 py-3 bg-secondary border border-secondary text-secondary-foreground font-bold tracking-wider rounded-lg hover:shadow-[0_0_20px_rgba(var(--secondary),0.5)] transition-all text-sm flex items-center justify-center gap-2">
                     <DownloadIcon className="w-4 h-4" /> Download
                   </a>
                 </div>
