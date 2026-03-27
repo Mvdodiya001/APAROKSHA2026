@@ -6,6 +6,7 @@ import { Mail, Phone } from "lucide-react";
 import { useContent } from "../hooks/useSiteData";
 import { Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
   const { contentData, loading } = useContent();
@@ -13,6 +14,9 @@ const Home = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col relative bg-background text-foreground">
+        <Helmet>
+          <title>Aparoksha | The Ultimate Tech Fest</title>
+        </Helmet>
         <BinaryBackground />
         <Navbar />
         <main className="flex-1 relative z-10 flex items-center justify-center">
@@ -25,6 +29,10 @@ const Home = () => {
 
   return (
     <div className="min-h-screen flex flex-col relative bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground">
+      <Helmet>
+        <title>Aparoksha | The Ultimate Tech Fest</title>
+        <meta name="description" content="Aparoksha is the annual technical festival of IIIT Allahabad. Join us for coding, cyber security, AI events, hardware hackathons, and immense fun." />
+      </Helmet>
       <BinaryBackground />
 
       <Navbar />

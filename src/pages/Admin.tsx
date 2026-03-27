@@ -5,6 +5,7 @@ import { Lock, Unlock, Upload, Settings, CalendarRange, Plus, Trash2, Save, Load
 import { TimelineDay } from "../data/timeline";
 import { SiteContent } from "../data/content";
 import { useTimeline, useContent } from "../hooks/useSiteData";
+import { Helmet } from "react-helmet-async";
 
 export default function Admin() {
   const { timelineData: fetchedTimeline, loading: timelineLoading } = useTimeline();
@@ -106,6 +107,10 @@ export default function Admin() {
   if (timelineLoading || contentLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background relative selection:bg-primary/30 selection:text-primary-foreground">
+        <Helmet>
+          <title>Aparoksha | Admin</title>
+          <meta name="robots" content="noindex, nofollow" />
+        </Helmet>
         <BinaryBackground />
         <div className="z-10 flex flex-col items-center gap-4 text-primary">
           <Loader2 className="w-12 h-12 animate-spin opacity-80" />
@@ -118,6 +123,10 @@ export default function Admin() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-background relative selection:bg-primary/30 selection:text-primary-foreground">
+        <Helmet>
+          <title>Aparoksha | Admin Access</title>
+          <meta name="robots" content="noindex, nofollow" />
+        </Helmet>
         <BinaryBackground />
         <div className="z-10 bg-card/50 backdrop-blur-md p-8 rounded-xl border border-border w-full max-w-sm">
           <div className="flex flex-col items-center mb-6">
@@ -152,6 +161,10 @@ export default function Admin() {
 
   return (
     <div className="min-h-screen flex flex-col relative bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground">
+      <Helmet>
+        <title>Aparoksha | Admin Dashboard</title>
+        <meta name="robots" content="noindex, nofollow" />
+      </Helmet>
       <BinaryBackground />
       <Navbar />
 

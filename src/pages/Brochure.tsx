@@ -4,12 +4,17 @@ import Footer from "../components/Footer";
 import { Download as DownloadIcon, FileText } from "lucide-react";
 import { useContent } from "../hooks/useSiteData";
 import { Loader2 } from "lucide-react";
+import { Helmet } from "react-helmet-async";
+
 export default function Brochure() {
   const { contentData, loading } = useContent();
 
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col relative bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground">
+        <Helmet>
+          <title>Aparoksha | Brochures & Downloads</title>
+        </Helmet>
         <BinaryBackground />
         <Navbar />
         <main className="flex-1 relative z-10 flex flex-col items-center justify-center pt-24 pb-12 px-6">
@@ -22,6 +27,10 @@ export default function Brochure() {
 
   return (
     <div className="min-h-screen flex flex-col relative bg-background text-foreground selection:bg-primary/30 selection:text-primary-foreground">
+      <Helmet>
+        <title>Aparoksha | Brochures & Downloads</title>
+        <meta name="description" content="Download the main flyer and schedules for Aparoksha'26 of IIIT Allahabad." />
+      </Helmet>
       <BinaryBackground />
       <Navbar />
 
