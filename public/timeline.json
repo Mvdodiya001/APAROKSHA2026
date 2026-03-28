@@ -1,6 +1,6 @@
 [
   {
-    "day": "Day -1 (March 16)",
+    "day": "Day -1 (April 16)",
     "events": [
       {
         "id": "cicada",
@@ -11,7 +11,7 @@
     ]
   },
   {
-    "day": "Day 0 (March 17)",
+    "day": "Day 0 (April 17)",
     "events": [
       {
         "id": "cicada-ending",
@@ -50,7 +50,7 @@
     ]
   },
   {
-    "day": "Day 1 (March 18)",
+    "day": "Day 1 (April 18)",
     "events": [
       {
         "id": "ctf-d1",
@@ -101,7 +101,7 @@
     ]
   },
   {
-    "day": "Day 2 (March 19)",
+    "day": "Day 2 (April 19)",
     "events": [
       {
         "id": "cfresh",
