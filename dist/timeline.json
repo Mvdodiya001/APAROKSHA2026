@@ -1,6 +1,6 @@
 [
   {
-    "day": "Day -1 (March 16)",
+    "day": "Day -1 (April 16)",
     "events": [
       {
         "id": "cicada",
@@ -11,103 +11,107 @@
     ]
   },
   {
-    "day": "Day 0 (March 17)",
+    "day": "Day 0 (17 April)",
     "events": [
       {
         "id": "cicada-ending",
         "name": "Cicada",
-        "time": "4:10am (Ending)"
+        "time": "4:00am (Ending)"
       },
       {
         "id": "inauguration",
-        "name": "Inaugration",
-        "time": "4:00 pm - 8:00 pm"
+        "name": "Inauguration & Industry Interaction Conclave",
+        "time": "4:00pm - 8:00pm",
+        "description": "Techno-management Industry Leadership Conclave, Department of Management Studies. Includes: Fireside chat, Audience interaction, Startup pitching. A holistic event combining technology, management, innovation, and industry interaction."
       },
       {
         "id": "techno-quiz",
-        "name": "Techomanagement Quiz and Mr.Googler",
+        "name": "Technomanagement Quiz & Mr. Googler",
         "time": "4:00pm - 8:00pm",
-        "description": ""
+        "description": "Android quiz combined with the Technomanagement quiz."
       },
       {
         "id": "iii-5-hackathon",
         "name": "III 5.0 Hackathon Presentation",
-        "time": "8:00pm - 10:00pm",
-        "description": ""
+        "time": "8:00pm - 10:00pm"
       },
       {
         "id": "cpl",
-        "name": "Coding Premier League",
+        "name": "IIITA Coding League",
         "time": "10:30pm - 12:30am",
-        "description": "(only the finale is during APK). 2 hrs duration. Auction and league matches will be done beforehand and format is similar to ipl , money used in auctions will be virtual. In a match between 2 teams in each round both teams will send their one player who will compete in a coding duel, team size 4 and 1 girl is must and after after 4 rounds team with more wins will get a point)"
+        "description": "Only the finale is during APK. 2 hrs duration. Auction and league matches will be done beforehand and format is similar to IPL — money used in auctions will be virtual. In a match between 2 teams in each round, both teams will send their one player who will compete in a coding duel. Team size 4 with 1 girl mandatory; after 4 rounds the team with more wins gets a point."
       },
       {
-        "id": "ctf-d0",
+        "id": "ctf",
         "name": "CTF",
-        "time": "10:00pm - 6:00pm (next day)",
-        "description": "CTF is a cybersecurity competition where players solve independent puzzles across categories like Web, Crypto, and Reverse Engineering to find hidden \"flags.\" Each challenge is worth a specific number of points, often decreasing in value as more teams solve them (dynamic scoring). The team with the highest points win."
+        "time": "10:00pm onwards",
+        "description": "CTF is a cybersecurity competition where players solve independent puzzles across categories like Web, Crypto, and Reverse Engineering to find hidden \"flags.\" Each challenge is worth a specific number of points, often decreasing in value as more teams solve them (dynamic scoring). The team with the highest points wins."
       }
     ]
   },
   {
-    "day": "Day 1 (March 18)",
+    "day": "Day 1 (April 18)",
     "events": [
       {
-        "id": "ctf-d1",
-        "name": "CTF",
-        "time": "till 6:00 pm",
-        "description": "continued"
+        "id": "pokerbots",
+        "name": "PokerBots",
+        "time": "10:00am - 12:00pm",
+        "description": "PokerBots is an algorithmic competition where participants develop autonomous agents for a custom poker variant, focusing on probabilistic modeling, game-theoretic strategies, and decision-making under uncertainty. Bots compete in structured matches, requiring efficient algorithms, opponent modeling, and optimal policy design."
       },
       {
-        "id": "quant-sim",
-        "name": "Quant Sim Trading / Pokerbots",
-        "time": "10:00am - 12:00pm",
-        "description": "PokerBots is an algorithmic competition where participants develop autonomous agents for a custom poker variant, focusing on probabilistic modeling, game-theoretic strategies, and decision-making under uncertainty. Bots compete in structured matches, requiring efficient algorithms, opponent modeling, and optimal policy design.",
-        "link": "https://www.iitpokerbots.in/"
+        "id": "brand-sprint",
+        "name": "Brand Sprint",
+        "time": "10:00am - 1:30pm",
+        "description": "A fast-paced MBA event where teams develop and pitch a complete brand strategy under a tight deadline."
       },
       {
         "id": "lang-challenge",
         "name": "Lang Challenge",
         "time": "12:30pm - 2:00pm",
-        "description": "Participants will learn and use new coding language on the spot"
+        "description": "Participants will learn and use a new coding language on the spot."
       },
       {
-        "id": "ipo-pitching",
-        "name": "Ipo Pitching",
-        "time": "3:00 pm - 4:00 pm",
-        "description": "teams of students who will advertise their IPO, teams with highest sold shares will be winners, point division will be based on ads made or their own creativity maximise sold shares"
+        "id": "meme-marketing-war",
+        "name": "Meme Marketing War",
+        "time": "2:00pm - 4:00pm"
       },
       {
-        "id": "keynote-d1",
-        "name": "Keynote Speaker Session* (GDG)",
-        "time": "4:30pm - 5:30pm"
+        "id": "speaker1",
+        "name": "Speaker Session - Striver",
+        "time": "4:00pm - 5:30pm",
+        "description": "Keynote session featuring Striver (Raj Vikramaditya), renowned competitive programmer and educator."
       },
       {
-        "id": "speaker2-d1",
-        "name": "Speaker 2",
+        "id": "speaker2",
+        "name": "Speaker Session - Vivek Gupta",
         "time": "5:30pm - 6:30pm"
       },
       {
         "id": "ex-machina",
         "name": "Ex-Machina",
-        "time": "7:00 - TBD",
-        "description": "Ex-Machina is a flagship Machine Learning and Artificial Intelligence competition under Aparoksha, the annual technical festival of IIIT Allahabad. It features Kaggle-style, team-based challenges where participants work on real-world datasets to build, optimize, and evaluate predictive models. The event typically includes multiple phases and focuses on data analysis, algorithm design, and AI modeling, providing participants with hands-on experience in solving practical ML problems."
+        "time": "7:00pm onwards",
+        "description": "Ex-Machina is a flagship Machine Learning and Artificial Intelligence competition under Aparoksha, the annual technical festival of IIIT Allahabad. It features Kaggle-style, team-based challenges where participants work on real-world datasets to build, optimize, and evaluate predictive models. The event typically includes multiple phases and focuses on data analysis, algorithm design, and AI modeling."
+      },
+      {
+        "id": "geneticx-virtuosi",
+        "name": "Geneticx & Virtuosi Performance",
+        "time": "9:00pm - 10:15pm"
       },
       {
         "id": "movie-nights",
         "name": "Movie Nights",
-        "time": "10:30pm - 01:30 am"
+        "time": "10:30pm - 1:30am"
       }
     ]
   },
   {
-    "day": "Day 2 (March 19)",
+    "day": "Day 2 (April 19)",
     "events": [
       {
         "id": "cfresh",
         "name": "CFresh",
         "time": "10:00am - 1:30pm",
-        "description": "CFresh is a competitive programming contest under Aparoksha exclusively for first-year students, where participants solve algorithmic problems within a fixed time on an online judging platform. It focuses on testing coding accuracy, efficiency, and logical thinking, providing freshers with real contest experience and a strong introduction to competitive programming"
+        "description": "CFresh is a competitive programming contest under Aparoksha exclusively for first-year students, where participants solve algorithmic problems within a fixed time on an online judging platform. It focuses on testing coding accuracy, efficiency, and logical thinking, providing freshers with real contest experience and a strong introduction to competitive programming."
       },
       {
         "id": "codered",
@@ -122,13 +126,18 @@
       },
       {
         "id": "ece-event",
-        "name": "ECE event",
+        "name": "ECE Event",
         "time": "6:00pm - 8:00pm"
       },
       {
-        "id": "prize-distribution",
-        "name": "Prize Distribution & Virtuosi",
-        "time": "9:00 pm (till end)"
+        "id": "rangtarangni",
+        "name": "Rangtarangni",
+        "time": "7:00pm - 8:00pm"
+      },
+      {
+        "id": "band-performance",
+        "name": "Band Performance - Ishan Vox",
+        "time": "9:00pm (till end)"
       }
     ]
   }
